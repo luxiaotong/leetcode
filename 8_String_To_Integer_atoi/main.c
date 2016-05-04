@@ -13,4 +13,5 @@ int main() {
     printf("%d\n", myAtoi("2147483648"));
     printf("%d\n", myAtoi("-2147483647"));
     printf("%d\n", myAtoi("-2147483648"));
+    printf("%d\n", myAtoi("-2147483649"));
 }

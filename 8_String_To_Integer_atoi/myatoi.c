@@ -34,9 +34,17 @@ int myAtoi(char* str) {
         }
 
         if ( str[i] >= 48 && str[i] <= 57 ) {
-            if ( rst >= (INT_MAX / 10) ) {
-                rst = INT_MAX;
-                break;
+            if ( sign > 0 ) {
+                if ( rst >= (INT_MAX / 10) ) {
+                    rst = INT_MAX;
+                    break;
+                }
+            } else {
+                printf("%d         %d\n", rst, -(INT_MIN/10));
+                if ( rst > -(INT_MIN / 10) ) {
+                    rst = INT_MIN;
+                    break;
+                }
             }
             //printf("rst1:%d\n", rst);
             rst = rst * 10 + (str[i] - '0');
