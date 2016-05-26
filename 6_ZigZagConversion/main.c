@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include "zigzag.h"
 int main() {
-    char *s = "PAYPALISHIRING"; 
-    char *res = convert(s, 5);
-    //char *s = "AB"; 
-    //char *res = convert(s, 1);
-    printf("%s\n", res);
+    printf("%s\n", convert("PAYPALISHIRING", 3));
+    printf("%s\n", convert("PAYPALISHIRING", 4));
+    printf("%s\n", convert("AB", 1));
+    printf("%s\n", convert("Apalindromeisaword,phrase,number,orothersequenceofunitsthatcanbereadthesamewayineitherdirection,withgeneralallowancesforadjustmentstopunctuationandworddividers.", 2));
     return 0;
 }
