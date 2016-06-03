@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include "substring.h"
+#include "uthash.h"
+
+int lengthOfLongestSubstring(char* s) {
+    int len = strlen(s);    
+    int i = 0, j = 0, from = 0, max = 0;
+
+    struct substr_hash {
+        int id;
+        char name;
+        UT_hash_handle hh;
+    };
+
+    struct substr_hash *tables[len];
+    for ( i = 0; i < len; i ++ ) {
+        tables[i] = NULL;
+    }
+
+    for ( i = 0; i < len; i ++ ) {
+        for ( j = from; j <= i; j ++ ) {
+            //Find
+            struct substr_hash *f;
+            int fid = (int) s[i];
+            HASH_FIND_INT(tables[j], &fid, f);
+            if ( f ) {
+                from = j + 1;
+                continue;
+            }
+
+            //Add
+            struct substr_hash *sub = malloc( sizeof(struct substr_hash) );
+            sub->id = s[i];
+            sub->name = s[i];
+            HASH_ADD_INT(tables[j], id, sub);
+        }
+    }
+
+    for ( i = 0; i < len; i ++ ) {
+        int count = HASH_COUNT(tables[i]);
+        if ( count > max ) {
+            max = count;
+        }
+    }
+
+    return max;
+}
