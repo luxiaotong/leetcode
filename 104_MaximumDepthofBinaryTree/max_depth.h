@@ -15,5 +15,6 @@ struct TreeNode {
 
 int maxDepth(struct TreeNode* root);
 struct TreeNode *deserializer(int tree_arr[], int len);
+void visualize(struct TreeNode *root, int len);
 
 #endif

@@ -37,23 +37,25 @@ struct TreeNode *deserializer(int tree_arr[], int len) {
         dequeue(q);
 
         fnode->val = tree_arr[i];
-        if ( i + 1 < len ) { //has left child
+        if ( i*2 + 1 < len ) { //has left child
             struct TreeNode *lnode = malloc(sizeof(struct TreeNode));
             lnode->val = 0;
             lnode->left = NULL;
             lnode->right = NULL;
             enqueue(q, lnode);
             fnode->left = lnode;
+            printf("fnode: %d lnode: %d\n", fnode->val, lnode->val);
         } else {
             fnode->left = NULL;
         }
-        if ( i + 2 < len ) { //has right child
+        if ( i*2 + 2 < len ) { //has right child
             struct TreeNode *rnode = malloc(sizeof(struct TreeNode));
             rnode->val = 0;
             rnode->left = NULL;
             rnode->right = NULL;
             enqueue(q, rnode);
             fnode->right= rnode;
+            printf("fnode: %d rnode: %d\n", fnode->val, rnode->val);
         } else {
             fnode->right = NULL;
         }
@@ -62,4 +64,32 @@ struct TreeNode *deserializer(int tree_arr[], int len) {
     }
 
     return root;
+}
+
+void visualize(struct TreeNode *root, int len) {
+    int count = 0, level = 1, width = 1;
+
+    Queue *q = initQueue(len);
+    enqueue(q, root);
+    struct TreeNode *cnode = NULL;
+
+    while ( (cnode = front(q)) != NULL ) {
+        count ++;
+        if ( count == width ) {
+            width *= 2;
+            level += 1;
+            printf("\n");
+        }
+        printf("%d ", cnode->val);
+        dequeue(q);
+
+        if ( cnode->left != NULL ) {
+            enqueue(q, cnode->left);
+        }
+        if ( cnode->right != NULL ) {
+            enqueue(q, cnode->right);
+        }
+    }
+
+    return;
 }
