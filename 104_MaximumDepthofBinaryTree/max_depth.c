@@ -15,9 +15,9 @@ int maxDepth(struct TreeNode *root) {
             rDepth = maxDepth(root->right);
         }
 
-        depth += (lDepth >= rDepth) ? lDepth : rDepth;
+        depth = ((lDepth >= rDepth) ? lDepth : rDepth) + 1;
     }
-    printf("step: %d, val: %d\n", depth, root->val);
+    printf("val: %d, depth: %d\n", root->val, depth);
     return depth;
 }
 
@@ -44,7 +44,6 @@ struct TreeNode *deserializer(int tree_arr[], int len) {
             lnode->right = NULL;
             enqueue(q, lnode);
             fnode->left = lnode;
-            printf("fnode: %d lnode: %d\n", fnode->val, lnode->val);
         } else {
             fnode->left = NULL;
         }
@@ -55,7 +54,6 @@ struct TreeNode *deserializer(int tree_arr[], int len) {
             rnode->right = NULL;
             enqueue(q, rnode);
             fnode->right= rnode;
-            printf("fnode: %d rnode: %d\n", fnode->val, rnode->val);
         } else {
             fnode->right = NULL;
         }
@@ -73,13 +71,15 @@ void visualize(struct TreeNode *root, int len) {
     enqueue(q, root);
     struct TreeNode *cnode = NULL;
 
-    while ( (cnode = front(q)) != NULL ) {
+    while ( q->size != 0 ) {
         count ++;
         if ( count == width ) {
             width *= 2;
             level += 1;
             printf("\n");
         }
+
+        cnode = front(q);
         printf("%d ", cnode->val);
         dequeue(q);
 
@@ -90,6 +90,7 @@ void visualize(struct TreeNode *root, int len) {
             enqueue(q, cnode->right);
         }
     }
+    printf("\n");
 
     return;
 }

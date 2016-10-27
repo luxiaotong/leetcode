@@ -2,6 +2,9 @@
 #define MAX_DEPTH
 
 #include <stdio.h>
+
+//https://github.com/junjizhi/fifo
+#define QueueElement struct TreeNode *
 #include "fifo/queue.h"
 
 /**
