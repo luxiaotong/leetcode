@@ -48,32 +48,19 @@ class Solution:
             p = p.next
 
         return r_head
+
     def reorderList(self, head: ListNode) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
-        if head == None:
-            return
+        if head == None: return
         slow = fast = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        
         mid = slow.next
         right = self.reverse(mid)
         slow.next = None
-        left = head
-
-        # n = head
-        # while n:
-        #     print("left:", n.val)
-        #     n = n.next
-        # print()
-
-        # n = right
-        # while n:
-        #     print("right:", n.val)
-        #     n = n.next  
 
         left = head
         while right:
